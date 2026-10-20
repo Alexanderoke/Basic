@@ -60,3 +60,59 @@ const taskInput = document.getElementById("taskInput");
           finishEdit(true);
         });
       }
+
+      function addTask() {
+        const text = taskInput.value.trim();
+        if (text === "") {
+          return;
+        }
+        createTask(text, false);
+        saveTasks();
+        taskInput.value = "";
+        taskInput.focus();
+      }
+
+      function loadTasks() {
+        const saved = localStorage.getItem("tasks");
+        if (saved === null) {
+          return;
+        }
+
+        try {
+          JSON.parse(saved).forEach(function (task) {
+            createTask(task.text, task.done);
+          });
+        } catch (error) {
+          localStorage.removeItem("tasks");
+        }
+      }
+
+      addBtn.addEventListener("click", addTask);
+      taskInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          addTask();
+        }
+      });
+
+      clearBtn.addEventListener("click", function (){
+        taskList.querySelectorAll("li.done").forEach(function (li) {
+          li.remove();
+        });
+        saveTasks();
+      })
+
+      deleteAllBtn.addEventListener("click", function() {
+        if (taskList.children.length === 0) {
+          return;
+        }
+        const sure = confirm("Delete all tasks? This can't be undone.");
+
+        if (sure){
+          taskList.innerHTML ="";
+          saveTasks();
+        }
+      });
+
+      
+      loadTasks();
+      updateCounter();
