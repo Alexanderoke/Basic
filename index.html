@@ -82,12 +82,12 @@
         margin-left: 8px;
         background: none;
         border-radius: 6px;
-        color: e03e3e;
+        color: red;
         cursor: pointer;
       }
 
       #deleteAllBtn:hover {
-        background-color: #fdecec;
+        background-color: #da0c0c;
       }
     </style>
   </head>
@@ -106,6 +106,7 @@
       const taskList = document.getElementById("taskList");
       const counter =document.getElementById("counter");
       const clearBtn = document.getElementById("clearBtn");
+      const deleteAllBtn = document.getElementById("deleteAllBtn");
 
       function updateCounter() {
         const total =taskList.querySelectorAll("li").length;
@@ -173,7 +174,7 @@
             createTask(task.text, task.done);
           });
         } catch (error) {
-          console.error("Failed to load tasks", error);
+          localStorage.removeItem("tasks");
         }
       }
 
@@ -190,6 +191,18 @@
         });
         saveTasks();
       })
+
+      deleteAllBtn.addEventListener("click", function() {
+        if (taskList.children.length === 0) {
+          return;
+        }
+        const sure = confirm("Delete all tasks? This can't be undone.");
+
+        if (sure){
+          taskList.innerHTML ="";
+          saveTasks();
+        }
+      });
 
       loadTasks();
       updateCounter();
