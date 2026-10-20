@@ -6,9 +6,9 @@ const taskInput = document.getElementById("taskInput");
       const deleteAllBtn = document.getElementById("deleteAllBtn");
 
       function updateCounter() {
-        const total =taskList.querySelectorAll("li").length;
+        const total = taskList.querySelectorAll("li").length;
         const remaining = taskList.querySelectorAll("li:not(.done)").length;
-        counter.textContent = remaining +"of" + total + "tasks left";        
+        counter.textContent = remaining + " of " + total + " tasks left";
       }
 
       function saveTasks() {
@@ -23,7 +23,38 @@ const taskInput = document.getElementById("taskInput");
         updateCounter();
       }
 
-       function editTask(li, span) {
+      function createTask(text, done) {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        const deleteBtn = document.createElement("button");
+
+        span.textContent = text;
+        deleteBtn.type = "button";
+        deleteBtn.className = "deleteBtn";
+        deleteBtn.textContent = "\u00d7";
+        deleteBtn.setAttribute("aria-label", "Delete task");
+
+        if (done) {
+          li.classList.add("done");
+        }
+
+        span.addEventListener("click", function () {
+          li.classList.toggle("done");
+          saveTasks();
+        });
+        span.addEventListener("dblclick", function () {
+          editTask(li, span);
+        });
+        deleteBtn.addEventListener("click", function () {
+          li.remove();
+          saveTasks();
+        });
+
+        li.append(span, deleteBtn);
+        taskList.appendChild(li);
+      }
+
+      function editTask(li, span) {
         const input = document.createElement("input");
         input.type = "text";
         input.value =span.textContent;
@@ -42,21 +73,21 @@ const taskInput = document.getElementById("taskInput");
           finished = true;
 
           const newText = input.value.trim();
-          if (save && newText !==""){
+          if (save && newText !== "") {
             span.textContent = newText;
           }
           li.replaceChild(span, input);
           saveTasks();
         }
         
-        input.addEventListener("keydown", function(event){
-          if (event.key === "Enter"){
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
             finishEdit(true);
-          }else if (event.key ==="Escape"){
+          } else if (event.key === "Escape") {
             finishEdit(false);
           }
         });
-        input.addEventListener("blur", function(){
+        input.addEventListener("blur", function () {
           finishEdit(true);
         });
       }
@@ -94,21 +125,21 @@ const taskInput = document.getElementById("taskInput");
         }
       });
 
-      clearBtn.addEventListener("click", function (){
+      clearBtn.addEventListener("click", function () {
         taskList.querySelectorAll("li.done").forEach(function (li) {
           li.remove();
         });
         saveTasks();
-      })
+      });
 
-      deleteAllBtn.addEventListener("click", function() {
+      deleteAllBtn.addEventListener("click", function () {
         if (taskList.children.length === 0) {
           return;
         }
         const sure = confirm("Delete all tasks? This can't be undone.");
 
-        if (sure){
-          taskList.innerHTML ="";
+        if (sure) {
+          taskList.replaceChildren();
           saveTasks();
         }
       });

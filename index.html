@@ -4,101 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        max-width: 400px;
-        margin: 40px;
-        padding: 0 16px;
-        background-color: #f4f4f9;
-      }
-      h1 {
-        text-align: center;
-        color: #333;
-      }
-      #taskInput {
-        width: 70%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 16px;
-      }
-      #addBtn {
-        background-color: #3451d1;
-        border-radius: 7px;
-      }
-      #taskList {
-        list-style: none;
-        padding: 0;
-        margin-top: 20px;
-      }
-      #taskList li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: white;
-        padding: 12px;
-        margin-bottom: 8px;
-        border-radius: 6px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      }
-      #taskList li span {
-        cursor: pointer;
-      }
-      #taskList li.done span {
-        text-decoration: line-through;
-        color: #9999;
-      }
-      .deleteBtn {
-        background: none;
-        border: none;
-        color: #e03e3e;
-        font-size: 18px;
-        cursor: pointer;
-      }
-
-      #counter {
-        color: #666;
-        font-size: 14px;
-        margin-top: 16px;
-        margin-bottom: 8px;
-      }
-
-      #clearBtn {
-        padding: 6px 12px;
-        background: none;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        color: #666;
-        cursor: pointer;
-      }
-
-      #clearBtn {
-        background-color: #eee;
-      }
-      
-      #deleAllBtn {
-        padding: 6px 12px;
-        margin-left: 8px;
-        background: none;
-        border-radius: 6px;
-        color: red;
-        cursor: pointer;
-      }
-
-      #deleteAllBtn:hover {
-        background-color: #da0c0c;
-      }
-
-      .editInput{
-        flex: 1;
-        margin-right: 8px;
-        padding: 4px 6px;
-        font-size: 16px;
-        border: 1px solid #da0c0c;
-        border-radius: 4px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    
   </head>
   <body>
     <h1>My To-Do List</h1>
@@ -106,9 +13,8 @@
     <button id="addBtn">Add</button>
     <p id="counter"></p>
     <button id="clearBtn">Clear completed</button>
-    <button id="deleteAllbtn">Delete all</button>
+    <button id="deleteAllBtn">Delete all</button>
     <ul id="taskList"></ul>
-
-    <script> </script>
+<script src="script.js" defer></script>
   </body>
 </html>
