@@ -4,11 +4,51 @@
     <meta charset="UTF-8">
     <meta name ="viewport" content="width=device-width, initialscale=1.0">
     <title>To-Do List</title>
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+        max-width: 400px;
+        margin: 40px;
+        padding: 0 16px;
+        background-color: #f4f4f9;
+      }
+      h1{
+        text-align: center;
+        color: #333;
+      }
+      #taskInput{
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 16px;
+      }
+      #addBtn{
+        background-color: #3451d1;
+        border-radius: 10px;
+      }
+      #taskList{
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+      #taskList li{
+        background: white;
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+    </style>
   </head>
   <body>
     <h1>My To-Do List</h1>
     <input type="text" id="taskInput" placeholder="Add a task...">
     <button id="addBtn">Add</button>
-    <ul id="tasklist"></ul>
+    <ul id="taskList"></ul>
+
+    <script>
+      
+    </script>
   </body>
 </html>
