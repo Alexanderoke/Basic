@@ -89,6 +89,15 @@
       #deleteAllBtn:hover {
         background-color: #da0c0c;
       }
+
+      .editInput{
+        flex: 1;
+        margin-right: 8px;
+        padding: 4px 6px;
+        font-size: 16px;
+        border: 1px solid #da0c0c;
+        border-radius: 4px;
+      }
     </style>
   </head>
   <body>
@@ -126,6 +135,44 @@
         updateCounter();
       }
 
+      function editTask(li, span) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value =span.textContent;
+        input.className ="editInput";
+        
+        li.replaceChild(input, span);
+        input.focus();
+        input.select();
+
+        let finished = false;
+
+        function finishEdit(save) {
+          if (finished) {
+            return;
+          }
+          finished = true;
+
+          const newText = input.value.trim();
+          if (save && newText !==""){
+            span.textContent = newText;
+          }
+          li.replaceChild(span, input);
+          saveTasks();
+        }
+        
+        input.addEventListener("keydown", function(event){
+          if (event.key === "Enter"){
+            finishEdit(true);
+          }else if (event.key ==="Escape"){
+            finishEdit(false);
+          }
+        });
+        input.addEventListener("blur", function(){
+          finishEdit(true);
+        });
+      }
+
       function createTask(text, done) {
         const li = document.createElement("li");
         if (done) {
@@ -137,6 +184,10 @@
         span.addEventListener("click", function () {
           li.classList.toggle("done");
           saveTasks();
+        });
+
+        span.addEventListener("dblclick", function (){
+          editTask(li, span);
         });
 
         const deleteBtn = document.createElement("button");
